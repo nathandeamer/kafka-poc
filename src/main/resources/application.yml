@@ -1,0 +1,4 @@
+kafka:
+  bootstrap-address: localhost:9092, localhost:9093, localhost:9094
+  topic-name: my-test-topic
+  group-id: my-test-group
