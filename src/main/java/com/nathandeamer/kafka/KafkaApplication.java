@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @SpringBootApplication
@@ -22,14 +21,13 @@ public class KafkaApplication {
 			int maxSeconds = 5;
 			int minSeconds = 1;
 
-			int i=0;
-			while (true) {
+			for (int i = 0; i < 10; i++) {
 				try {
-					i++;
+					//i++;
 					producer.sendMessage(String.valueOf(i));
 					int randomSeconds = random.nextInt((maxSeconds - minSeconds) + 1) + minSeconds;
 					Thread.sleep(randomSeconds * 1000);
-				} catch (InterruptedException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
