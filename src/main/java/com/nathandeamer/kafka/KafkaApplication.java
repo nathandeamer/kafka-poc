@@ -15,6 +15,8 @@ public class KafkaApplication {
 		ConfigurableApplicationContext context = SpringApplication.run(KafkaApplication.class, args);
 		KafkaProducerService producer = context.getBean(KafkaProducerService.class);
 
+		// TODO: FOrce onto the same partition by setting the order as being important.
+
 		// Start sending messages to kafka:
 		Executors.newSingleThreadExecutor().execute(() -> {
 			Random random = new Random();
@@ -23,8 +25,7 @@ public class KafkaApplication {
 
 			for (int i = 0; i < 10; i++) {
 				try {
-					//i++;
-					producer.sendMessage(String.valueOf(i));
+					producer.sendMessage("KEY", String.valueOf(i)); // I've set the key to be the same, so all messages are written to the same partition for a demo.
 					int randomSeconds = random.nextInt((maxSeconds - minSeconds) + 1) + minSeconds;
 					Thread.sleep(randomSeconds * 1000);
 				} catch (Exception e) {
@@ -32,6 +33,7 @@ public class KafkaApplication {
 				}
 			}
 		});
+
 	}
 
 }
