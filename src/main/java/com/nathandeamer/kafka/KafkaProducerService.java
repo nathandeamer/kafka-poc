@@ -39,10 +39,10 @@ public class KafkaProducerService {
             log.error("Execution/Interrupted Exception and the details is {}", e.getMessage());
             throw e;
         } catch (TimeoutException e) {
-            log.error("Timeout Exception and the details is {}", e.getMessage());
+            log.error("Timeout Exception and the details is {}", e.getMessage(), e);
             throw e;
         } catch (Exception e) {
-            log.error("Execution sending the message and the details are {}", e.getMessage());
+            log.error("Execution sending the message and the details are {}", e.getMessage(), e);
             throw e;
         }
 
